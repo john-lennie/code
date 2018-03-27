@@ -1,0 +1,464 @@
+//////////////////// Variables, Types and Operators ////////////////////
+
+-------------------- Arithmetic --------------------
+
++,*,-,/ are arithmetic operators
+
+% represents the remainder or modulo
+
+Special numbers --------------------
+
+Infinity and -Infinity
+
+NaN stands for not a number
+
+-------------------- Strings --------------------
+
+\ in strings indicates the character after has a special meaning
+
+\n means newline, \t means tab
+
+\\ results in one \ in strings
+
++ between strings concatenates them
+
+-------------------- Unary operators --------------------
+
+not all operators are symbols, ie. typeof which produces a string naming the type of value you give
+
+-------------------- Boolean values --------------------
+
+strings are ordred alphabetically, but uppercase letters are "less than" lowercase
+
+>= (greater than or equal to), <= (less than or equal to), == (equal to), and != (not equal to)
+
+only NaN doesn't equal itself
+
+-------------------- Logical operators --------------------
+
+JavaScript supports three logical operators: and, or, and not. They are used to "reason" boleans
+
+&& is and, || is or, and ! is not
+
+&& results in true only if both values given are true
+
+|| produces true if either of the values given to it is true
+
+! is a unary operator that flips the value given to it
+
+the conditional operator or "ternary" operator is written with a question mark and a colon, like this:
+
+<script type="text/javascript">
+
+console.log(true ? 1 : 2);
+// → 1
+
+</script>
+
+or
+
+<script type="text/javascript">
+
+console.log(false ? 1 : 2);
+// → 2
+
+</script>
+
+The value on the left of the question mark “picks” which of the other two values will come out. When it is true, the middle value is chosen, and when it is false, the value on the right comes out.
+
+-------------------- Automatic type conversion --------------------
+
+When an operator is applied to the “wrong” type of value, JavaScript will quietly convert that value to the type it wants, using a set of rules that often aren’t what you want or expect. This is called "type coercion".
+
+When you want to test whether a value has a real value instead of null or undefined, you can simply compare it to null with the == (or !=) operator.
+
+0, NaN, and the empty string ("") count as false
+
+=== tests if precisly equal, !== tests if precisely not equal
+
+-------------------- Short-circuiting of logical operators --------------------
+
+The || operator will return the value to its left when that can be converted to true and will return the value on its right otherwise.
+
+<script type="text/javascript">
+
+console.log(null || "user")
+// → user
+
+</script>
+
+<script type="text/javascript">
+
+console.log("Karl" || "user")
+// → Karl
+
+</script>
+
+This functionality allows the || operator to be used as a way to fall back on a default value.
+
+The && operator works similarly, but the other way around. When the value to its left is something that converts to false, it returns that value, and otherwise it returns the value on its right.
+
+the value to the right is only evaluated when necessaary, this is called short-circuit evaluation.
+
+
+
+
+
+
+
+
+
+
+//////////////////// Functions ////////////////////
+
+-------------------- Defining a function --------------------
+
+A function definition is just a regular variable definition where the value given to the variable happens to be a function.
+
+A function is created by an expression that starts with the keyword function. Functions have a set of parameters and a body, which contains the statements that are to be executed when the function is called. The function body must always be wrapped in braces, even when it consists of only a single statement
+
+A return statement determines the value the function returns. When control comes across such a statement, it immediately jumps out of the current function and gives the returned value to the code that called the function. The return keyword without an expression after it will cause the function to return undefined.
+
+-------------------- Parameters and scopes --------------------
+
+The "localness" of variables applies only to the parameters and to variables declared with the var keyword inside the function body. Variables declared outside of any function are called global, because they are visible throughout the program.
+
+Each local scope can also see all the local scopes that contain it.
+
+All variables from blocks around a function’s definition are visible—meaning both those in function bodies that enclose it and those at the top level of the program. This approach to variable visibility is called lexical scoping.
+
+In JavaScript, functions are the only things that create a new scope.
+
+-------------------- Functions as values --------------------
+
+A function value can do all the things that other values can do—you can use it in arbitrary expressions, not just call it. It is possible to store a function value in a new place, pass it as an argument to a function, and so on. Similarly, a variable that holds a function is still just a regular variable and can be assigned a new value, like so:
+
+<script type="text/javascript">
+
+var launchMissiles = function(value) {
+  missileSystem.launch("now");
+};
+if (safeMode)
+  launchMissiles = function(value) {/* do nothing */};
+
+</script>
+
+-------------------- Declaration notation --------------------
+
+The function keyword can also be used at the start of a statement
+
+function square(x) {
+  return x * x;
+}
+
+Function declarations are not part of the regular top-to-bottom flow of control. They are conceptually moved to the top of their scope and can be used by all the code in that scope.
+
+<script type="text/javascript">
+
+function example() {
+  function a() {} // Okay
+  if (something) {
+    function b() {} // Danger!
+  }
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+//////////////////// Data Structures: Objects and Arrays ////////////////////
+
+-------------------- Data Sets --------------------
+
+JavaScript provides a data type specifically for storing sequences of values. It is called an array and is written as a list of values between square brackets, separated by commas.
+
+<script type="text/javascript">
+
+var listOfNumbers = [2, 3, 5, 7, 11];
+console.log(listOfNumbers[1]);
+// → 3
+console.log(listOfNumbers[1 - 1]);
+// → 2
+
+</script>
+
+The first element can be read with listOfNumbers[0].
+
+-------------------- Properties --------------------
+
+The two most common ways to access properties in JavaScript are with a dot and with square brackets. ie. value.x and value[x]
+
+-------------------- Methods --------------------
+
+Properties that contain functions are generally called methods of the value they belong to. As in, “toUpperCase is a method of a string”.
+
+The push method can be used to add values to the end of an array. The pop method does the opposite: it removes the value at the end of the array and returns it. An array of strings can be flattened to a single string with the join method. The argument given to join determines the text that is glued between the array’s elements.
+
+<script type="text/javascript">
+
+var mack = [];
+mack.push("Mack");
+mack.push("the", "Knife");
+console.log(mack);
+// → ["Mack", "the", "Knife"]
+console.log(mack.join(" "));
+// → Mack the Knife
+console.log(mack.pop());
+// → Knife
+console.log(mack);
+// → ["Mack", "the"]
+
+</script>
+
+-------------------- Objects --------------------
+
+Values of the type object are arbitrary collections of properties, and we can add or remove these properties as we please. One way to create an object is by using a curly brace notation.
+
+<script type="text/javascript">
+
+var day1 = {
+squirrel: false,
+events: ["work", "touched tree", "pizza", "running",
+         "television"]
+};
+
+console.log(day1.squirrel);
+// → false
+console.log(day1.wolf);
+// → undefined
+day1.wolf = false;
+console.log(day1.wolf);
+// → false
+
+</script>
+
+-------------------- Mutability --------------------
+
+with objects, there is a difference between having two references to the same object and having two different objects that contain the same properties.
+
+i.e.
+
+<script type="text/javascript">
+
+var object1 = {value: 10};
+var object2 = object1;
+var object3 = {value: 10};
+
+console.log(object1 == object2);
+// → true
+console.log(object1 == object3);
+// → false
+
+</script>
+
+The object1 and object2 variables grasp the same object, which is why changing object1 also changes the value of object2. The variable object3 points to a different object, which initially contains the same properties as object1 but lives a separate life.
+
+
+
+
+
+
+
+
+
+
+//////////////////// Program Structure ////////////////////
+
+-------------------- Control flow --------------------
+
+When your program contains more than one statement, the statements are executed, predictably, from top to bottom.
+
+-------------------- Conditional Execution --------------------
+
+Choosing between two different routes based on a Boolean value.
+
+Conditional execution is written with the if keyword in JavaScript. In the simple case, we just want some code to be executed if, and only if, a certain condition holds.
+
+The else keyword can be used, together with if, to create two separate, alternative execution paths.
+
+i.e.
+
+<script type="text/javascript">
+
+var theNumber = Number(prompt("Pick a number", ""));
+if (!isNaN(theNumber))
+  alert("Your number is the square root of " +
+        theNumber * theNumber);
+else
+  alert("Hey. Why didn't you give me a number?");
+
+</script>
+
+Multiple if/else pairs can also be “chained” together.
+
+i.e.
+
+<script type="text/javascript">
+
+var num = Number(prompt("Pick a number", "0"));
+
+if (num < 10)
+  alert("Small");
+else if (num < 100)
+  alert("Medium");
+else
+  alert("Large");
+
+</script>
+
+-------------------- While and Do Loops --------------------
+
+Basic counting loop that prints all even numbers from 0 to 12:
+
+<script type="text/javascript">
+
+var number = 0;
+while (number <= 12) {
+  console.log(number);
+  number = number + 2;
+}
+// → 0
+// → 2
+//   … etcetera
+
+</script>
+
+Whenever we need to execute multiple statements inside a loop, we wrap them in curly braces ({ and }). A sequence of statements wrapped in braces is called a block.
+
+Below is a program that calculates and shows the value of 2 to the 10th power. We use two variables: one to keep track of our result and one to count how often we have multiplied this result by 2.
+
+<script type="text/javascript">
+
+var result = 1;
+var counter = 0;
+while (counter < 10) {
+  result = result * 2;
+  counter = counter + 1;
+}
+console.log(result);
+// → 1024
+
+</script>
+
+A do loop always executes its body at least once, and it starts testing whether it should stop only after that first execution.
+
+The below loop continues going round until you provide a name that is not the empty string.
+
+<script type="text/javascript">
+
+do {
+  var yourName = prompt("Who are you?");
+} while (!yourName);
+console.log(yourName);
+
+</script>
+
+-------------------- Indenting Code --------------------
+
+You could write a program as a single long line if you felt like it. The role of the indentation inside blocks is to make the structure of the code stand out.
+
+-------------------- For Loops --------------------
+
+Many loops follow a similar pattern. First, a “counter” variable is created to track the progress of the loop. Then comes a while loop, whose test expression usually checks whether the counter has reached some boundary yet. At the end of the loop body, the counter is updated to track progress. JavaScript and similar languages provide a slightly shorter and more comprehensive form for this, the for loop.
+
+<script type="text/javascript">
+
+for (var number = 0; number <= 12; number = number + 2)
+  console.log(number);
+// → 0
+// → 2
+// → 4
+//   … etcetera
+
+</script>
+
+The parentheses after a for keyword must contain two semicolons. The part before the first semicolon initializes the loop, usually by defining a variable. The second part is the expression that checks whether the loop must continue. The final part updates the state of the loop after every iteration. In most cases, this is shorter and clearer than a while construct.
+
+Here is the code that computes 210, using for instead of while:
+
+<script type="text/javascript">
+
+var result = 1;
+for (var counter = 0; counter < 10; counter = counter + 1)
+  result = result * 2;
+console.log(result);
+// → 1024
+
+</script>
+
+-------------------- Breaking Out of a Loop --------------------
+
+Having the loop’s condition produce false is not the only way a loop can finish. There is a special statement called break that has the effect of immediately jumping out of the enclosing loop.
+
+This program illustrates the break statement. It finds the first number that is both greater than or equal to 20 and divisible by 7.
+
+<script type="text/javascript">
+
+for (var current = 20; ; current++) {
+  if (current % 7 == 0)
+    break;
+}
+console.log(current);
+// → 21
+
+</script>
+
+The continue keyword is similar to break, in that it influences the progress of a loop. When continue is encountered in a loop body, control jumps out of the body and continues with the loop’s next iteration.
+
+-------------------- Updating variables succinctly --------------------
+
+Especially when looping, a program often needs to “update” a variable to hold a value based on that variable’s previous value.
+
+counter = counter + 1;
+
+can also be written as...
+
+counter += 1;
+
+Similar shortcuts work for many other operators, such as result *= 2 to double result or counter -= 1 to count downward.
+
+For counter += 1 and counter -= 1, there are even shorter equivalents: counter++ and counter--.
+
+The counting example can now be shortened to:
+
+<script type="text/javascript">
+
+for (var number = 0; number <= 12; number += 2)
+  console.log(number);
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
