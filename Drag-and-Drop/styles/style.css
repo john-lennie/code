@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 50px;
+}
+
+#nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  padding: 20px 10px;
+  text-align: center;
+}
+
+#nav  a {
+  font-family: "Times New Roman", Georgia, Serif;
+  font-size: 12px;
+  display: inline-block;
+  color: #000;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+}
